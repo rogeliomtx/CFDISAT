@@ -30,22 +30,22 @@
             <div class="card">
                 <div class="row summary">
                     <div class="col-sm-3 col-xs-6">
-                        {{resumen.totalImpuestosRetenidos | currency}}
+                        {{resumen.totalImpuestosRetenidos| currency}}
                         <br>
                         <span class="title">RETENIDOS</span>
                     </div>
                     <div class="col-sm-3 col-xs-6">
-                        {{resumen.totalImpuestosTrasladados | currency}}
+                        {{resumen.totalImpuestosTrasladados| currency}}
                         <br>
                         <span class="title">TRASLADADOS</span>
                     </div>
                     <div class="col-sm-3 col-xs-6">
-                        {{resumen.subtotal | currency}}
+                        {{resumen.subtotal| currency}}
                         <br>
                         <span class="title">SUBTOTAL</span>
                     </div>
                     <div class="col-sm-3 col-xs-6">
-                        {{resumen.total | currency}}
+                        {{resumen.total| currency}}
                         <br>
                         <span class="title">TOTAL</span>
                     </div>
@@ -55,7 +55,7 @@
             <div class="card" ng-repeat="certificado in certificados" ng-init="verDetalleCerficiado = false;">
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="content">
+                        <section>
                             <div class="row">
                                 <div class="col-xs-10">
                                     <div class="header">{{certificado.emisor.nombre}}</div>
@@ -65,7 +65,7 @@
                                     <button ng-click="_detalleCerficiado = !_detalleCerficiado" class="btn btn-link">{{_detalleCerficiado ? "VER MENOS" : "VER MÁS"}}</button>
                                 </div>
                             </div>
-                        </div>
+                        </section>
 
                         <hr>
 
@@ -76,7 +76,7 @@
                                 <span class="title">RETENIDOS</span>
                             </div>
                             <div class="col-sm-3 col-xs-6">
-                                {{certificado.impuestos.totalImpuestosTrasladados | currency}}
+                                {{certificado.impuestos.totalImpuestosTrasladados| currency}}
                                 <br>
                                 <span class="title">TRASLADADOS</span>
                             </div>
@@ -98,7 +98,7 @@
                 <div ng-show="_detalleCerficiado">
                     <div class="row">
                         <div class="col-md-3">
-                            <div class="content">
+                            <section>
                                 <label class="label label-default">Emisor</label>
                                 <span ng-init="emisorVerMas = false;" ng-click="_emisor = !_emisor;" class="btn btn-link">{{_emisor ? "VER MENOS" : "VER MÁS"}}</span>
                                 <div class="header">{{certificado.emisor.nombre}}</div>
@@ -127,10 +127,11 @@
                                         </tr>
                                     </table>
                                 </div>
-                            </div>
+                            </section>
+
                             <hr>
 
-                            <div class="content">
+                            <section>
                                 <label class="label label-default">Receptor</label>
                                 <span ng-init="_receptor = false;" ng-click="_receptor = !_receptor;" class="btn btn-link">{{_receptor ? "VER MENOS" : "VER MÁS"}}</span>
                                 <div class="header">{{certificado.receptor.nombre}}</div>
@@ -156,9 +157,9 @@
                                     </table>
                                 </div>
                                 <hr>
-                            </div>
+                            </section>
 
-                            <div class="content">
+                            <section>
                                 <label class="label label-default">Expedido en</label>
                                 <span ng-init="_expedidoEn = false;" ng-click="_expedidoEn = !_expedidoEn;" class="btn btn-link">{{_expedidoEn ? "VER MENOS" : "VER MÁS"}}</span>
                                 <div ng-show="_expedidoEn">
@@ -182,120 +183,248 @@
                                     </table>
                                 </div>
                                 <hr>
-                            </div>
+                            </section>
                         </div>
 
                         <div class="col-md-6 col-sm-8">
-                            <div class="content">
-                                <label class="label label-default">Conceptos</label>
-                                <div class="conceptos">
-                                    <div class="concepto" ng-repeat="concepto in certificado.conceptos">
-                                        <div>
-                                            <span class="text-bold">{{concepto.cantidad}} {{concepto.unidad}}</span> {{concepto.descripcion}}
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-xs-9"></div>
-                                            <div class="col-xs-3">
-                                                <h5 class="text-right">{{ concepto.importe | currency }}</h5>
+                            <section>
+                                <section>
+                                    <label class="label label-default">Conceptos</label>
+                                    <div class="conceptos">
+                                        <div class="concepto" ng-repeat="concepto in certificado.conceptos">
+                                            <div>
+                                                <span class="text-bold">{{concepto.cantidad}} {{concepto.unidad}}</span> {{concepto.descripcion}}
                                             </div>
-                                        </div>
-                                        <span class="btn btn-link"
-                                              ng-init="_concepto = false;"
-                                              ng-click="_concepto = !_concepto">{{ _concepto ? "VER MENOS" : "VER MÁS" }}
-                                        </span>
-                                        <div class="row" ng-show="_concepto">
-                                            <div class="col-xs-6" ng-if="concepto.valorUnitario !== null">
-                                                <h5>Valor Unitario</h5>
-                                                {{ concepto.valorUnitario | currency }}
+                                            <div class="row">
+                                                <div class="col-xs-9"></div>
+                                                <div class="col-xs-3">
+                                                    <h5 class="text-right">{{ concepto.importe | currency }}</h5>
+                                                </div>
                                             </div>
-                                            <div class="col-xs-6" ng-if="concepto.cuentaPredial !== null">
-                                                <h5>Cuenta pedrial</h5>
-                                                {{ concepto.cuentaPredial}}
-                                            </div>
-                                            <div class="col-xs-6" ng-if="concepto.informacionAduanera !== null">
-                                                <h5>Información Aduanera</h5>
-                                                <table class="table-striped table-responsive table-padded">
-                                                    <tr><th>FECHA</th>     <td>{{concepto.informacionAduanera.fecha}}</td></tr>
-                                                    <tr><th>NÚMERO</th>    <td>{{concepto.informacionAduanera.numero}}</td></tr>
-                                                    <tr><th>ADUANA</th>    <td>{{concepto.informacionAduanera.aduana}}</td></tr>
-                                                </table>
-                                            </div>
-                                            <div class="col-xs-6" ng-if="concepto.parte !== null">
-                                                <h5>Partes</h5>
-                                                {{ concepto.parte}}
-                                            </div>
-                                            <div class="col-xs-6" ng-if="concepto.noIdentificacion !== null">
-                                                <h5>No Identificación</h5>
-                                                {{ concepto.noIdentificacion}}
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <hr>
-
-                                <div class="content" ng-init="nomina = certificado.complemento.nomina" ng-if="certificado.complemento.nomina != null">
-                                    <label class="label label-default">Complementos</label>
-                                    <h5>Nómina</h5>
-                                    
-                                    <h6>Percepciones</h6>
-                                    <p>Total gravado: {{nomina.percepciones.totalGravado| currency}}</p>
-                                    <p>Total exento: {{nomina.percepciones.totalExento| currency}}</p>
-                                    
-                                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
-                                        <div class="panel panel-success" ng-repeat="percepcion in nomina.percepciones.percepcion">
-                                            <div class="panel-heading" role="tab">
-                                                <h4 class="panel-title">
-                                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#{{percepcion.tipoPercepcion}}" aria-expanded="false" aria-controls="collapseOne">
-                                                        {{percepcion.tipoPercepcion | nominaTipoPercepcion}}
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="{{percepcion.tipoPercepcion}}" class="panel-collapse collapse in" role="tabpanel">
-                                                <div class="panel-body">
+                                            <span class="btn btn-link"
+                                                  ng-init="_concepto = false;"
+                                                  ng-click="_concepto = !_concepto">{{ _concepto ? "VER MENOS" : "VER MÁS" }}
+                                            </span>
+                                            <div class="row" ng-show="_concepto">
+                                                <div class="col-xs-6" ng-if="concepto.valorUnitario !== null">
+                                                    <h5>Valor Unitario</h5>
+                                                    {{ concepto.valorUnitario | currency }}
+                                                </div>
+                                                <div class="col-xs-6" ng-if="concepto.cuentaPredial !== null">
+                                                    <h5>Cuenta pedrial</h5>
+                                                    {{ concepto.cuentaPredial}}
+                                                </div>
+                                                <div class="col-xs-6" ng-if="concepto.informacionAduanera !== null">
+                                                    <h5>Información Aduanera</h5>
                                                     <table class="table-striped table-responsive table-padded">
-                                                        <tbody>
-                                                            <tr>
-                                                                <th style="width: 9em;">Tipo de percepción</th>
-                                                                <td><strong>{{percepcion.tipoPercepcion}}</strong> {{percepcion.tipoPercepcion | nominaTipoPercepcion}}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Concepto</th>
-                                                                <td>{{percepcion.concepto}}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Clave</th>
-                                                                <td>{{percepcion.clave}}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Importe Gravado</th>
-                                                                <td>{{percepcion.importeGravado| currency}}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Importe Exento</th>
-                                                                <td>{{percepcion.importeExento| currency}}</td>
-                                                            </tr>
-                                                        </tbody>
+                                                        <tr><th>FECHA</th>     <td>{{concepto.informacionAduanera.fecha}}</td></tr>
+                                                        <tr><th>NÚMERO</th>    <td>{{concepto.informacionAduanera.numero}}</td></tr>
+                                                        <tr><th>ADUANA</th>    <td>{{concepto.informacionAduanera.aduana}}</td></tr>
                                                     </table>
+                                                </div>
+                                                <div class="col-xs-6" ng-if="concepto.parte !== null">
+                                                    <h5>Partes</h5>
+                                                    {{ concepto.parte}}
+                                                </div>
+                                                <div class="col-xs-6" ng-if="concepto.noIdentificacion !== null">
+                                                    <h5>No Identificación</h5>
+                                                    {{ concepto.noIdentificacion}}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                    
-                                    
                                     <hr>
-                                </div>
+                                </section>
+
+                                <section
+                                    ng-init="nomina = certificado.complemento.nomina" 
+                                    ng-if="certificado.complemento.nomina !== null">
+                                    <label class="label label-default">Complementos</label>
+                                    <h5>Nómina <button ng-click="_nomina = !_nomina" class="btn btn-link">{{_nomina ? "VER MENOS" : "VER MÁS"}}</button></h5>
+
+                                    <section ng-show="_nomina">
+                                        <section ng-if="nomina.percepciones !== null">
+                                            <h6>Percepciones</h6>
+                                            <table class="table-striped table-responsive table-padded">
+                                                <tr>
+                                                    <td>Total gravado: {{nomina.percepciones.totalGravado| currency}}</td>
+                                                    <td>Total exento: {{nomina.percepciones.totalExento| currency}}</td>
+                                                </tr>
+                                            </table>
+                                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                                <div class="panel panel-success" ng-repeat="percepcion in nomina.percepciones.percepcion">
+                                                    <div class="panel-heading" role="tab">
+                                                        <h4 class="panel-title">
+                                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#p{{percepcion.tipoPercepcion}}" aria-expanded="false">
+                                                                {{percepcion.tipoPercepcion| nominaTipoPercepcion}}
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="p{{percepcion.tipoPercepcion}}" class="panel-collapse collapse" role="tabpanel">
+                                                        <div class="panel-body">
+                                                            <table class="table-striped table-responsive table-padded">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th style="width: 9em;">Tipo de percepción</th>
+                                                                        <td><strong>{{percepcion.tipoPercepcion}}</strong> {{percepcion.tipoPercepcion| nominaTipoPercepcion}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Concepto</th>
+                                                                        <td>{{percepcion.concepto}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Clave</th>
+                                                                        <td>{{percepcion.clave}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Importe Gravado</th>
+                                                                        <td>{{percepcion.importeGravado| currency}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Importe Exento</th>
+                                                                        <td>{{percepcion.importeExento| currency}}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        </section>
+
+                                        <section ng-if="nomina.deducciones !== null">
+                                            <h6>Deducciones</h6>
+                                            <table class="table-striped table-responsive table-padded">
+                                                <tr>
+                                                    <td>Total gravado: {{nomina.deducciones.totalGravado| currency}}</td>
+                                                    <td>Total exento: {{nomina.deducciones.totalExento| currency}}</td>
+                                                </tr>
+                                            </table>
+                                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
+                                                <div class="panel panel-success" ng-repeat="deduccion in nomina.deducciones.deduccion">
+                                                    <div class="panel-heading" role="tab">
+                                                        <h4 class="panel-title">
+                                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#d{{deduccion.tipoDeduccion}}" aria-expanded="false">
+                                                                {{deduccion.tipoDeduccion| nominaTipoDeduccion}}
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="d{{deduccion.tipoDeduccion}}" class="panel-collapse collapse" role="tabpanel">
+                                                        <div class="panel-body">
+                                                            <table class="table-striped table-responsive table-padded">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th style="width: 9em;">Tipo de percepción</th>
+                                                                        <td><strong>{{deduccion.tipoDeduccion}}</strong> {{deduccion.tipoDeduccion| nominaTipoDeduccion}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Concepto</th>
+                                                                        <td>{{deduccion.concepto}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Clave</th>
+                                                                        <td>{{deduccion.clave}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Importe Gravado</th>
+                                                                        <td>{{deduccion.importeGravado| currency}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Importe Exento</th>
+                                                                        <td>{{deduccion.importeExento| currency}}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        </section>
+
+                                        <section ng-if="nomina.incapacidades !== null">
+                                            <h6>Incapacidades</h6>
+                                            <table class="table-striped table-responsive table-padded" ng-repeat="incapacidad in nomina.incapacidades">
+                                                <tr><td>{{incapacidad.tipoIncapacidad}}</td></tr>
+                                                <tr><td>{{incapacidad.diasIncapacidad}}</td></tr>
+                                                <tr><td>{{incapacidad.descuento| currency}}</td></tr>
+                                            </table>
+                                            <hr>
+                                        </section>
+
+                                        <section ng-if="nomina.horasExtras !== null">
+                                            <h6>Horas Extra</h6>
+                                            <table class="table-striped table-responsive table-padded" ng-repeat="horaExtra in nomina.horasExtras">
+                                                <tr><td>{{horaExtra.tipoHoras}}</td></tr>
+                                                <tr><td>{{horaExtra.dias}}</td></tr>
+                                                <tr><td>{{horaExtra.horasExtra}}</td></tr>
+                                                <tr><td>{{horaExtra.importePagado| currency}}</td></tr>
+                                            </table>
+                                            <hr>
+                                        </section>
+                                        
+                                        <button ng-click="_nominaDetalle = !_nominaDetalle" class="btn btn-link btn-block">{{_nominaDetalle ? "VER MENOS" : "VER MÁS DETALLE DE NÓMINA"}}</button>
+                                        
+                                        <section ng-show="_nominaDetalle">
+                                            <table class="table-striped table-responsive table-padded">
+                                                <tr><th>Version</th><td>{{nomina.version}}</td></tr>
+                                                <tr><th>Registro patronal</th><td>{{nomina.registroPatronal}}</td></tr>
+                                                <tr><th>Num. Empleado</th><td>{{nomina.numEmpleado}}</td></tr>
+                                                <tr><th>CURP</th><td>{{nomina.curp}}</td></tr>
+                                                <tr><th>Tipo de regimen</th><td><strong>{{nomina.tipoRegimen}}</strong> {{nomina.tipoRegimen| nominaRegimenContratacion}}</td></tr>
+                                                <tr><th>Num. Seguridad Social</th><td>{{nomina.numSeguridadSocial}}</td></tr>
+                                                <tr><th>Fecha de pago</th><td>{{nomina.fechaPago}}</td></tr>
+                                                <tr><th>Fecha inicial pago</th><td>{{nomina.fechaInicialPago}}</td></tr>
+                                                <tr><th>Fecha final pago</th><td>{{nomina.fechaFinalPago}}</td></tr>
+                                                <tr><th>Num. dias pagados</th><td>{{nomina.numDiasPagados}}</td></tr>
+                                                <tr><th>Departamento</th><td>{{nomina.departamento}}</td></tr>
+                                                <tr><th>CLABE</th><td>{{nomina.clabe}}</td></tr>
+                                                <tr><th>Banco</th><td>{{nomina.banco}}</td></tr>
+                                                <tr><th>Antiguedad</th><td>{{nomina.antiguedad}}</td></tr>
+                                                <tr><th>Puesto</th><td>{{nomina.puesto}}</td></tr>
+                                                <tr><th>Tipo de contrato</th><td>{{nomina.tipoContrato}}</td></tr>
+                                                <tr>
+                                                    <th>
+                                                        Tipo jornada <i class="glyphicon glyphicon-info-sign" title="Tipo de jornada que cubre el trabajador: Diurna, nocturna, mixta, por hora, reducida, continuada, partida, por turnos, etc."></i>
+                                                    </th>
+                                                    <td>{{nomina.tipoJornada}}</td></tr>
+                                                <tr>
+                                                    <th>
+                                                        Periodicidad de pago <i class="glyphicon glyphicon-info-sign" title="Forma en que se establece el pago del salario: diario, semanal, quincenal, catorcenal mensual, bimestral, unidad de obra, comisión, precio alzado, etc."></i>
+                                                    </th>
+                                                    <td>{{nomina.periodicidadPago}}</td></tr>
+                                                <tr>
+                                                    <th>
+                                                        Salario base de cotización <i class="glyphicon glyphicon-info-sign" title="Retribución otorgada al trabajador, que se integra por los pagos hechos en efectivo por cuota diaria, gratificaciones, percepciones, alimentación, habitación, primas, comisiones, prestaciones en especie y cualquiera otra cantidad o prestación que se entregue al trabajador por su trabajo, sin considerar los conceptos que se excluyen de conformidad con el Artículo 27 de la Ley del Seguro Social. (Se emplea para pagar las cuotas y aportaciones de Seguridad Social)."></i>
+                                                    </th>
+                                                    <td>{{nomina.salarioBaseCotApor}}</td></tr>
+                                                <tr>
+                                                    <th>
+                                                        Riesgo Puesto <i class="glyphicon glyphicon-info-sign" title="Clave conforme a la Clase en que deben inscribirse los patrones, de acuerdo a las actividades que desempeñan sus trabajadores, según lo previsto en el artículo 196 del Reglamento en Materia de Afiliación Clasificación de Empresas, Recaudación y Fiscalización. Catálogo publicado en el portal del SAT en internet"></i>
+                                                    </th>
+                                                    <td><strong>{{nomina.riesgoPuesto}}</strong> {{nomina.riesgoPuesto| nominaRiesgoPuesto}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        Salario diario integrado <i class="glyphicon glyphicon-info-sign" title="El salario se integra con los pagos hechos en efectivo por cuota diaria, gratificaciones, percepciones, habitación, primas, comisiones, prestaciones en especie y cualquiera otra cantidad o prestación que se entregue al trabajador por su trabajo, de conformidad con el Art. 84 de la Ley Federal del Trabajo. (Se utiliza para el cálculo de las indemnizaciones)."></i>
+                                                    </th>
+                                                    <td>{{nomina.salarioDiarioIntegrado| currency}}</td></tr>
+                                            </table>
+                                            <hr>
+                                        </section>
+                                    </section>
+                                </section>
 
                                 <div class="content" ng-if="certificado.complemento.timbreFiscalDigital != null">
                                     <label class="label label-default">Complementos</label>
                                     <h5>Timbre fiscal digital <button ng-click="_timbreFiscal = !_timbreFiscal" class="btn btn-link">{{_timbreFiscal ? "VER MENOS" : "VER MÁS"}}</button></h5>
-                                    
+
                                     <table 
                                         ng-show="_timbreFiscal" 
                                         ng-init="timbreFiscal = certificado.complemento.timbreFiscalDigital"
                                         class="table-striped table-responsive table-padded">
-                                        <tr><th style="width: 9em;">Fecha de timbrado</th><td>{{timbreFiscal.fechaTimbrado | date : 'dd/MM/yyyy h:mm:ss a'}}</td></tr>
+                                        <tr><th style="width: 9em;">Fecha de timbrado</th><td>{{timbreFiscal.fechaTimbrado| date : 'dd/MM/yyyy h:mm:ss a'}}</td></tr>
                                         <tr><th>No. certificado SAT</th><td>{{timbreFiscal.noCertificadoSAT}}</td></tr>
                                         <tr><th>Sello CFD</th><td>{{timbreFiscal.selloCFD}}</td></tr>
                                         <tr><th>Sello SAT</th><td>{{timbreFiscal.selloSAT}}</td></tr>
@@ -303,12 +432,12 @@
                                     </table>
                                     <hr>
                                 </div>
-                            </div>
+                            </section>
                         </div>
 
                         <div class="col-md-3 col-sm-4">
-                            <label class="label label-default">Impuestos</label>
-                            <div class="content">
+                            <section>
+                                <label class="label label-default">Impuestos</label>
                                 <h5>Trasladados</h5>
                                 <div ng-if="!certificado.impuestos.traslados">
                                     Ninguno.
@@ -319,9 +448,11 @@
                                         <td>{{traslado.impuesto}} | TASA: {{traslado.tasa}}</td>
                                     </tr>
                                 </table>
-                            </div>
+                            </section>
+
                             <hr>
-                            <div class="content">
+
+                            <section>
                                 <h5>Retenciones</h5>
                                 <div ng-if="!certificado.impuestos.retenciones">
                                     Ninguno.
@@ -332,9 +463,11 @@
                                         <td>{{retencion.impuesto}}</td>
                                     </tr>
                                 </table>
-                            </div>
+                            </section>
+
                             <hr>
-                            <div class="content">
+
+                            <section>
                                 <h5>Información de pago</h5>
                                 <table class="table-striped table-responsive table-padded">
                                     <tr>
@@ -350,7 +483,7 @@
                                         <td>{{certificado.condicionesDePago}}</td>
                                     </tr>
                                 </table>
-                            </div>
+                            </section>
                         </div>
                     </div>
 
@@ -361,7 +494,7 @@
 
                         <div class="row" ng-show="_masDetalle">
                             <div class="col-sm-6">
-                                <div class="content">
+                                <section>
                                     <label class="label label-default">Certificado</label>
                                     <h5>Información del certificado</h5>
                                     <table class="table-striped table-responsive table-padded">
@@ -373,40 +506,43 @@
                                         <tr><th>Condiciones de pago</th><td>{{certificado.condicionesDePago}}</td></tr>
                                         <tr><th>Tipo de comprobante</th><td>{{certificado.tipoDeComprobante}}</td></tr>
                                     </table>
-                                    <hr>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <label class="label label-default">Certificado</label>
-                                <h5>Información del certificado</h5>
-                                <table class="table-striped table-responsive table-padded">
-                                    <tr><th>Num. Cuenta de pago</th><td>{{certificado.numCtaPago}}</td></tr>
-                                    <tr><th>Descuento</th><td>{{certificado.descuento}}</td></tr>
-                                    <tr><th>Motivo de descuento</th><td>{{certificado.motivoDescuento}}</td></tr>
-                                    <tr><th>Tipo de cambio</th><td>{{certificado.tipoCambio}}</td></tr>
-                                    <tr><th>Moneda</th><td>{{certificado.moneda}}</td></tr>
-                                    <tr><th>Lugar de expedición</th><td>{{certificado.lugarExpedicion}}</td></tr>
-                                    <tr><th>Folio Fiscal Original</th><td>{{certificado.folioFiscalOrig}}</td></tr>
-                                    <tr><th>Serie folio fiscal original</th><td>{{certificado.serieFolioFiscalOrig}}</td></tr>
-                                    <tr><th>Fecha folio fiscal original</th><td>{{certificado.fechaFolioFiscalOrig}}</td></tr>
-                                    <tr><th>Monto Folio fiscal original</th><td>{{certificado.montoFolioFiscalOrig}}</td></tr>
-                                </table>
-                            </div>
-                            <div class="col-xs-12">
-                                <label class="label label-default">Certificado</label>
-                                <h5>Información del certificado</h5>
-                                <table class="table-striped table-responsive table-padded">
-                                    <tr><th style="width: 120px;">No. Certificado</th><td>{{certificado.noCertificado}}</td></tr>
-                                    <tr><th>Fecha</th><td>{{certificado.fecha| date : 'dd/MM/yyyy h:mm:ss a'}}</td></tr>
-                                    <tr><th>Certificado</th><td>{{certificado.certificado}}</td></tr>
-                                    <tr><th>Sello</th><td>{{certificado.sello}}</td></tr>
-                                </table>
+                                </section>
+                                <hr>
                             </div>
 
+                            <div class="col-sm-6">
+                                <section>
+                                    <label class="label label-default">Certificado</label>
+                                    <h5>Información del certificado</h5>
+                                    <table class="table-striped table-responsive table-padded">
+                                        <tr><th>Num. Cuenta de pago</th><td>{{certificado.numCtaPago}}</td></tr>
+                                        <tr><th>Descuento</th><td>{{certificado.descuento}}</td></tr>
+                                        <tr><th>Motivo de descuento</th><td>{{certificado.motivoDescuento}}</td></tr>
+                                        <tr><th>Tipo de cambio</th><td>{{certificado.tipoCambio}}</td></tr>
+                                        <tr><th>Moneda</th><td>{{certificado.moneda}}</td></tr>
+                                        <tr><th>Lugar de expedición</th><td>{{certificado.lugarExpedicion}}</td></tr>
+                                        <tr><th>Folio Fiscal Original</th><td>{{certificado.folioFiscalOrig}}</td></tr>
+                                        <tr><th>Serie folio fiscal original</th><td>{{certificado.serieFolioFiscalOrig}}</td></tr>
+                                        <tr><th>Fecha folio fiscal original</th><td>{{certificado.fechaFolioFiscalOrig}}</td></tr>
+                                        <tr><th>Monto Folio fiscal original</th><td>{{certificado.montoFolioFiscalOrig}}</td></tr>
+                                    </table>
+                                </section>
+                            </div>
+                            <div class="col-xs-12">
+                                <section>
+                                    <label class="label label-default">Certificado</label>
+                                    <h5>Información del certificado</h5>
+                                    <table class="table-striped table-responsive table-padded">
+                                        <tr><th style="width: 120px;">No. Certificado</th><td>{{certificado.noCertificado}}</td></tr>
+                                        <tr><th>Fecha</th><td>{{certificado.fecha| date : 'dd/MM/yyyy h:mm:ss a'}}</td></tr>
+                                        <tr><th>Certificado</th><td>{{certificado.certificado}}</td></tr>
+                                        <tr><th>Sello</th><td>{{certificado.sello}}</td></tr>
+                                    </table>
+                                </section>
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 

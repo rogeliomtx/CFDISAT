@@ -532,4 +532,45 @@ app.controller('CDFICtrl', function ($scope) {
             }
         }
     };
+    
+}).filter('nominaTipoDeduccion', function() {
+    return function(input) {
+        if (input === "" || input === null) {
+            return "";
+        }
+        
+        for (var t in _nomina.tipoDeduccion) {
+            if (_nomina.tipoDeduccion[t].clave === input) {
+                return _nomina.tipoDeduccion[t].descripcion;
+            }
+        }
+    };
+    
+}).filter('nominaRiesgoPuesto', function() {
+    return function(input) {
+        if (input === "" || input === null) {
+            return "";
+        }
+        
+        for (var t in _nomina.riesgoPuesto) {
+            if (_nomina.riesgoPuesto[t].clave == input) {
+                return _nomina.riesgoPuesto[t].descripcion;
+            }
+        }
+    };
+    
+}).filter('nominaRegimenContratacion', function() {
+    return function(input) {
+        if (input === "" || input === null) {
+            return "";
+        }
+        
+        for (var t in _nomina.regimenContratacion) {
+            if (_nomina.regimenContratacion[t].clave == input) {
+                return _nomina.regimenContratacion[t].descripcion;
+            }
+        }
+    };
 });
+
+
