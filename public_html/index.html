@@ -411,12 +411,13 @@
                                                     </th>
                                                     <td>{{nomina.salarioDiarioIntegrado| currency}}</td></tr>
                                             </table>
-                                            <hr>
                                         </section>
+                                        
+                                        <hr>
                                     </section>
                                 </section>
 
-                                <div class="content" ng-if="certificado.complemento.timbreFiscalDigital != null">
+                                <section ng-if="certificado.complemento.timbreFiscalDigital != null">
                                     <label class="label label-default">Complementos</label>
                                     <h5>Timbre fiscal digital <button ng-click="_timbreFiscal = !_timbreFiscal" class="btn btn-link">{{_timbreFiscal ? "VER MENOS" : "VER MÁS"}}</button></h5>
 
@@ -431,7 +432,7 @@
                                         <tr><th>Version</th><td>{{timbreFiscal.version}}</td></tr>
                                     </table>
                                     <hr>
-                                </div>
+                                </section>
                             </section>
                         </div>
 
