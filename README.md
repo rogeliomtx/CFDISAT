@@ -3,26 +3,26 @@
 ### Complementos
 * [Timbre fiscal digital (TFD).](https://github.com/rogeliomtx/CFDISAT/wiki/Timbre-Fiscal-Digital)
 * Recibo de pago de nómina.
-* Estado de cuenta de combustibles de monederos electrónicos. (No implementado aún)
-* Donatarias. (No implementado aún)
-* Compra venta de divisas. (No implementado aún)
-* Otros derechos e impuestos. (No implementado aún)
-* Leyendas fiscales. (No implementado aún)
-* Persona física integrante de coordinado. (No implementado aún)
-* Turista pasajero extranjero. (No implementado aún)
-* Spei de tercero a tercero. (No implementado aún)
-* Sector de ventas al detalle (Detallista). (No implementado aún)
-* CFDI Registro fiscal. (No implementado aún)
-* Pago en especie. (No implementado aún)
-* Vales de despensa. (No implementado aún)
-* Consumo de combustibles. (No implementado aún)
-* Aerolíneas. (No implementado aún)
-* Notarios Públicos. (No implementado aún)
-* Vehículo usado. (No implementado aún)
-* Servicios parciales de construcción. (No implementado aún)
-* Renovación y sustitución de vehículos (No implementado aún)
-* Certificado de destrucción (No implementado aún)
-* Obras de arte plásticas y antigüedades (No implementado aún)
+* Estado de cuenta de combustibles de monederos electrónicos. 
+* Donatarias. 
+* Compra venta de divisas. 
+* Otros derechos e impuestos. 
+* Leyendas fiscales. 
+* Persona física integrante de coordinado. 
+* Turista pasajero extranjero. 
+* Spei de tercero a tercero. 
+* Sector de ventas al detalle (Detallista). 
+* CFDI Registro fiscal. 
+* Pago en especie. 
+* Vales de despensa. 
+* Consumo de combustibles. 
+* Aerolíneas. 
+* Notarios Públicos. 
+* Vehículo usado. 
+* Servicios parciales de construcción. 
+* Renovación y sustitución de vehículos 
+* Certificado de destrucción 
+* Obras de arte plásticas y antigüedades 
 
 ### Addenda 
 _(Se necesitan ejemplos para pruebas)_
