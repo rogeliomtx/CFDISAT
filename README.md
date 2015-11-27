@@ -5,7 +5,7 @@
 * [Timbre fiscal digital (TFD).](https://github.com/rogeliomtx/CFDISAT/wiki/Timbre-Fiscal-Digital)
 * Recibo de pago de nómina.
 
-**No implementados aún, pero considerados.**
+**No implementados aún, pero considerados.** [Referencia](http://www.sat.gob.mx/informacion_fiscal/factura_electronica/Paginas/complementos_factura_cfdi.aspx)
 * Estado de cuenta de combustibles de monederos electrónicos. 
 * Donatarias. 
 * Compra venta de divisas. 
@@ -45,7 +45,6 @@ _(Se necesitan ejemplos para pruebas)_
 ## Conceptos
 * Información aduanera
 * Cuenta predial
-* Complemento concepto
 * Parte
 * Cantidad
 * Unidad
@@ -53,6 +52,13 @@ _(Se necesitan ejemplos para pruebas)_
 * Descripción
 * Valor unitario
 * Importe
+
+### Complemento concepto
+**No implementados aún, pero considerados** [Referencia](http://www.sat.gob.mx/informacion_fiscal/factura_electronica/Paginas/complementos_factura_cfdi.aspx)
+* Instituciones educativas privadas.
+* Venta de vehículos.
+* Terceros.
+* Acreditamiento del IEPS
 
 ## Impuestos
 * Retenciones
