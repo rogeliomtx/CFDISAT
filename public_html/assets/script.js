@@ -152,30 +152,33 @@ app.controller('CDFICtrl', function ($scope) {
                 }
                 
                 /* Detalles */
-                nomina.registroPatronal = jNomina.RegistroPatronal ? jNomina.RegistroPatronal : null;
-                nomina.numEmpleado      = jNomina.NumEmpleado;
-                nomina.curp             = jNomina.Curp;
-                nomina.tipoRegimen      = jNomina.TipoRegimen;
-                nomina.numSeguridadSocial = jNomina.NumSeguridadSocial ? jNomina.NumSeguridadSocial : null;
-                nomina.fechaPago = jNomina.FechaPago;
-                nomina.fechaInicialPago = jNomina.FechaInicialPago;
-                nomina.fechaFinalPago = jNomina.FechaFinalPago;
-                nomina.numDiasPagados = jNomina.NumDiasPagados;
-                nomina.departamento = jNomina.Departamento ? jNomina.Departamento : null;
-                nomina.clabe = jNomina.Clabe ? jNomina.Clabe : null;
-                nomina.banco = jNomina.Banco ? jNomina.Banco : null;
-                nomina.fechaInicioRelLaboral = jNomina.FechaInicioRelLaboral ? jNomina.FechaInicioRelLaboral : null;
-                nomina.antiguedad = jNomina.Antiguedad ? jNomina.Antiguedad : null;
-                nomina.puesto = jNomina.Puesto ? jNomina.Puesto : null;
-                nomina.tipoContrato = jNomina.TipoContrato ? jNomina.TipoContrato : null;
-                nomina.tipoJornada = jNomina.TipoJornada ? jNomina.TipoJornada : null;
-                nomina.periodicidadPago = jNomina.PeriodicidadPago ? jNomina.PeriodicidadPago : null;
-                nomina.salarioBaseCotApor = jNomina.SalarioBaseCotApor ? jNomina.SalarioBaseCotApor : null;
-                nomina.riesgoPuesto = jNomina.RiesgoPuesto ? jNomina.RiesgoPuesto : null;
+                nomina.registroPatronal       = jNomina.RegistroPatronal       ? jNomina.RegistroPatronal : null;
+                nomina.numEmpleado            = jNomina.NumEmpleado;
+                nomina.curp                   = jNomina.Curp;
+                nomina.tipoRegimen            = jNomina.TipoRegimen;
+                nomina.numSeguridadSocial     = jNomina.NumSeguridadSocial     ? jNomina.NumSeguridadSocial : null;
+                nomina.fechaPago              = jNomina.FechaPago;
+                nomina.fechaInicialPago       = jNomina.FechaInicialPago;
+                nomina.fechaFinalPago         = jNomina.FechaFinalPago;
+                nomina.numDiasPagados         = jNomina.NumDiasPagados;
+                nomina.departamento           = jNomina.Departamento           ? jNomina.Departamento : null;
+                nomina.clabe                  = jNomina.Clabe                  ? jNomina.Clabe : null;
+                nomina.banco                  = jNomina.Banco                  ? jNomina.Banco : null;
+                nomina.fechaInicioRelLaboral  = jNomina.FechaInicioRelLaboral  ? jNomina.FechaInicioRelLaboral : null;
+                nomina.antiguedad             = jNomina.Antiguedad             ? jNomina.Antiguedad : null;
+                nomina.puesto                 = jNomina.Puesto                 ? jNomina.Puesto : null;
+                nomina.tipoContrato           = jNomina.TipoContrato           ? jNomina.TipoContrato : null;
+                nomina.tipoJornada            = jNomina.TipoJornada            ? jNomina.TipoJornada : null;
+                nomina.periodicidadPago       = jNomina.PeriodicidadPago       ? jNomina.PeriodicidadPago : null;
+                nomina.salarioBaseCotApor     = jNomina.SalarioBaseCotApor     ? jNomina.SalarioBaseCotApor : null;
+                nomina.riesgoPuesto           = jNomina.RiesgoPuesto           ? jNomina.RiesgoPuesto : null;
                 nomina.salarioDiarioIntegrado = jNomina.SalarioDiarioIntegrado ? jNomina.SalarioDiarioIntegrado : null;
-                
-                comprobante.complemento.nomina = nomina;
+            } else {
+                nomina = null;
             }
+            
+            comprobante.complemento.nomina = nomina;
+            
 
             /* Addenda */
             /* ============================================================================================= */
@@ -203,11 +206,11 @@ app.controller('CDFICtrl', function ($scope) {
             comprobante.total                = json.total;
             comprobante.subTotal             = json.subTotal;
 
-            comprobante.descuento            = json.descuento ? json.descuento : null;
+            comprobante.descuento            = json.descuento       ? json.descuento : null;
             comprobante.motivoDescuento      = json.motivoDescuento ? json.motivoDescuento : null;
 
             comprobante.tipoCambio           = json.tipoCambio ? json.tipoCambio : null;
-            comprobante.moneda               = json.moneda ? json.moneda : null;
+            comprobante.moneda               = json.moneda     ? json.moneda : null;
 
             comprobante.lugarExpedicion      = json.LugarExpedicion;
 

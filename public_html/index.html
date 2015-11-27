@@ -235,11 +235,27 @@
                                     </div>
                                     <hr>
                                 </section>
+                                
+                                <section ng-if="certificado.complemento.timbreFiscalDigital != null">
+                                    <label class="label label-default">Complementos</label>
+                                    <h5>Timbre fiscal digital <button ng-click="_timbreFiscal = !_timbreFiscal" class="btn btn-link">{{_timbreFiscal ? "VER MENOS" : "VER MÁS"}}</button></h5>
+
+                                    <table 
+                                        ng-show="_timbreFiscal" 
+                                        ng-init="timbreFiscal = certificado.complemento.timbreFiscalDigital"
+                                        class="table-striped table-responsive table-padded">
+                                        <tr><th style="width: 9em;">Fecha de timbrado</th><td>{{timbreFiscal.fechaTimbrado| date : 'dd/MM/yyyy h:mm:ss a'}}</td></tr>
+                                        <tr><th>No. certificado SAT</th><td>{{timbreFiscal.noCertificadoSAT}}</td></tr>
+                                        <tr><th>Sello CFD</th><td>{{timbreFiscal.selloCFD}}</td></tr>
+                                        <tr><th>Sello SAT</th><td>{{timbreFiscal.selloSAT}}</td></tr>
+                                        <tr><th>Version</th><td>{{timbreFiscal.version}}</td></tr>
+                                    </table>
+                                    <hr>
+                                </section>
 
                                 <section
                                     ng-init="nomina = certificado.complemento.nomina" 
-                                    ng-if="certificado.complemento.nomina !== null">
-                                    <label class="label label-default">Complementos</label>
+                                    ng-if="certificado.complemento.nomina != null">
                                     <h5>Nómina <button ng-click="_nomina = !_nomina" class="btn btn-link">{{_nomina ? "VER MENOS" : "VER MÁS"}}</button></h5>
 
                                     <section ng-show="_nomina">
@@ -415,23 +431,6 @@
                                         
                                         <hr>
                                     </section>
-                                </section>
-
-                                <section ng-if="certificado.complemento.timbreFiscalDigital != null">
-                                    <label class="label label-default">Complementos</label>
-                                    <h5>Timbre fiscal digital <button ng-click="_timbreFiscal = !_timbreFiscal" class="btn btn-link">{{_timbreFiscal ? "VER MENOS" : "VER MÁS"}}</button></h5>
-
-                                    <table 
-                                        ng-show="_timbreFiscal" 
-                                        ng-init="timbreFiscal = certificado.complemento.timbreFiscalDigital"
-                                        class="table-striped table-responsive table-padded">
-                                        <tr><th style="width: 9em;">Fecha de timbrado</th><td>{{timbreFiscal.fechaTimbrado| date : 'dd/MM/yyyy h:mm:ss a'}}</td></tr>
-                                        <tr><th>No. certificado SAT</th><td>{{timbreFiscal.noCertificadoSAT}}</td></tr>
-                                        <tr><th>Sello CFD</th><td>{{timbreFiscal.selloCFD}}</td></tr>
-                                        <tr><th>Sello SAT</th><td>{{timbreFiscal.selloSAT}}</td></tr>
-                                        <tr><th>Version</th><td>{{timbreFiscal.version}}</td></tr>
-                                    </table>
-                                    <hr>
                                 </section>
                             </section>
                         </div>
