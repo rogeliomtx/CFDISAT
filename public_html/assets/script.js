@@ -13,6 +13,68 @@ app.controller('CDFICtrl', function ($scope) {
         total                     : 0
     };
     
+    $scope.nuevoConcepto = function(conceptoJson) {
+        var concepto = new _comprobante.Concepto();
+
+        /* información aduanera : PRUEBAS */
+        if (conceptoJson.InformacionAduanera) {
+            var informacionAduanera = new _comprobante.InformacionAduanera();
+            informacionAduanera.numero = conceptoJson.InformacionAduanera.numero;
+            informacionAduanera.fecha  = conceptoJson.InformacionAduanera.fecha;
+            informacionAduanera.aduana = conceptoJson.InformacionAduanera.aduana ? conceptoJson.InformacionAduanera.aduana : null;
+
+            concepto.informacionAduanera = informacionAduanera;
+        } else {
+            concepto.informacionAduanera = null;
+        }
+
+        /* cuenta predial : PRUEBAS */
+        if (conceptoJson.CuentaPredial)
+            concepto.cuentaPredial.numero = conceptoJson.CuentaPredial ? conceptoJson.CuentaPredial.numero : null;
+        else 
+            concepto.cuentaPredial = null;
+
+        /* complemento concepto : PENDIENTE DESARROLLO */
+        /* http://www.sat.gob.mx/informacion_fiscal/factura_electronica/Paginas/complementos_factura_cfdi.aspx */
+        if (conceptoJson.ComplementoConcepto) {
+
+        }
+
+        /* parte : PRUEBAS */
+        if (conceptoJson.Parte) {
+
+            /* parte : información aduanera */
+            if (conceptoJson.Parte.InformacionAduanera) {
+                informacionAduanera = new _comprobante.InformacionAduanera();
+                informacionAduanera.numero = conceptoJson.InformacionAduanera.numero;
+                informacionAduanera.fecha  = conceptoJson.InformacionAduanera.fecha;
+                informacionAduanera.aduana = conceptoJson.InformacionAduanera.aduana ? conceptoJson.InformacionAduanera.aduana : null;
+
+                concepto.parte.informacionAduanera = informacionAduanera;
+            }
+
+            concepto.parte.cantidad         = conceptoJson.Parte.cantidad;
+            concepto.parte.unidad           = conceptoJson.Parte.unidad           ? conceptoJson.Parte.unidad           : null;
+            concepto.parte.noIdentificacion = conceptoJson.Parte.noIdentificacion ? conceptoJson.Parte.noIdentificacion : null;
+            concepto.parte.descripcion      = conceptoJson.Parte.descripcion;
+            concepto.parte.valorUnitario    = conceptoJson.Parte.valorUnitario    ? conceptoJson.Parte.valorUnitario    : null;
+            concepto.parte.importe          = conceptoJson.Parte.importe         ? concepto.Json.Parte.importe          : null;
+
+        } else {
+            concepto.parte = null;
+        }
+
+        concepto.cantidad         = conceptoJson.cantidad;
+        concepto.unidad           = conceptoJson.unidad;
+        concepto.noIdentificacion = conceptoJson.noIdentificacion ? conceptoJson.noIdentificacion : null;
+        concepto.descripcion      = conceptoJson.descripcion;
+        concepto.valorUnitario    = conceptoJson.valorUnitario;
+        concepto.importe          = conceptoJson.importe;
+
+        return concepto;
+    };
+    
+    
     $scope.cargarComprobantes = function () {
         for (var c in $scope.cfdis) {
             var comprobante = new Comprobante();
@@ -295,77 +357,12 @@ app.controller('CDFICtrl', function ($scope) {
             /* ============================================================================================= */
             comprobante.conceptos = new Array();
 
-            var informacionAduanera, concepto;
-
-            var nuevoConcepto = function(conceptoJson) {
-                concepto = new _comprobante.Concepto();
-
-                /* información aduanera : PRUEBAS */
-                if (conceptoJson.InformacionAduanera) {
-                    informacionAduanera = new _comprobante.InformacionAduanera();
-                    informacionAduanera.numero = conceptoJson.InformacionAduanera.numero;
-                    informacionAduanera.fecha  = conceptoJson.InformacionAduanera.fecha;
-                    informacionAduanera.aduana = conceptoJson.InformacionAduanera.aduana ? conceptoJson.InformacionAduanera.aduana : null;
-
-                    concepto.informacionAduanera = informacionAduanera;
-                } else {
-                    concepto.informacionAduanera = null;
-                }
-
-                /* cuenta predial : PRUEBAS */
-                if (conceptoJson.CuentaPredial)
-                    concepto.cuentaPredial.numero = conceptoJson.CuentaPredial ? conceptoJson.CuentaPredial.numero : null;
-                else 
-                    concepto.cuentaPredial = null;
-
-                /* complemento concepto : PENDIENTE DESARROLLO */
-                /* http://www.sat.gob.mx/informacion_fiscal/factura_electronica/Paginas/complementos_factura_cfdi.aspx */
-                if (conceptoJson.ComplementoConcepto) {
-                    
-                }
-
-                /* parte : PRUEBAS */
-                if (conceptoJson.Parte) {
-
-                    /* parte : información aduanera */
-                    if (conceptoJson.Parte.InformacionAduanera) {
-                        informacionAduanera = new _comprobante.InformacionAduanera();
-                        informacionAduanera.numero = conceptoJson.InformacionAduanera.numero;
-                        informacionAduanera.fecha  = conceptoJson.InformacionAduanera.fecha;
-                        informacionAduanera.aduana = conceptoJson.InformacionAduanera.aduana ? conceptoJson.InformacionAduanera.aduana : null;
-
-                        concepto.parte.informacionAduanera = informacionAduanera;
-                    }
-
-                    concepto.parte.cantidad         = conceptoJson.Parte.cantidad;
-                    concepto.parte.unidad           = conceptoJson.Parte.unidad           ? conceptoJson.Parte.unidad           : null;
-                    concepto.parte.noIdentificacion = conceptoJson.Parte.noIdentificacion ? conceptoJson.Parte.noIdentificacion : null;
-                    concepto.parte.descripcion      = conceptoJson.Parte.descripcion;
-                    concepto.parte.valorUnitario    = conceptoJson.Parte.valorUnitario    ? conceptoJson.Parte.valorUnitario    : null;
-                    concepto.parte.importe          = conceptoJson.Parte.importe         ? concepto.Json.Parte.importe          : null;
-
-                } else {
-                    concepto.parte = null;
-                }
-
-                concepto.cantidad         = conceptoJson.cantidad;
-                concepto.unidad           = conceptoJson.unidad;
-                concepto.noIdentificacion = conceptoJson.noIdentificacion ? conceptoJson.noIdentificacion : null;
-                concepto.descripcion      = conceptoJson.descripcion;
-                concepto.valorUnitario    = conceptoJson.valorUnitario;
-                concepto.importe          = conceptoJson.importe;
-
-                return concepto;
-            };
-
             if (Array.isArray(json.Conceptos.Concepto)) {
                 for (var c in json.Conceptos.Concepto) {
-                    concepto = nuevoConcepto(json.Conceptos.Concepto[c]);
-                    comprobante.conceptos.push(concepto);
+                    comprobante.conceptos.push($scope.nuevoConcepto(json.Conceptos.Concepto[c]));
                 }
             } else {
-                concepto = nuevoConcepto(json.Conceptos.Concepto);
-                comprobante.conceptos.push(concepto);
+                comprobante.conceptos.push($scope.nuevoConcepto(json.Conceptos.Concepto));
             }
 
 
