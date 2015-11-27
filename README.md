@@ -1,8 +1,11 @@
 ## Visualizador CFDI v3.2
 
 ### Complementos
+**Complementos implementados**
 * [Timbre fiscal digital (TFD).](https://github.com/rogeliomtx/CFDISAT/wiki/Timbre-Fiscal-Digital)
 * Recibo de pago de nómina.
+
+**No implementados aún, pero considerados.**
 * Estado de cuenta de combustibles de monederos electrónicos. 
 * Donatarias. 
 * Compra venta de divisas. 
