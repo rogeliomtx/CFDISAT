@@ -1,6 +1,3 @@
-<!--
- edited with XMLSpy v2010 rel. 3 (http://www.altova.com) by SAT (SAT) 
--->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pfic="http://www.sat.gob.mx/pfic" targetNamespace="http://www.sat.gob.mx/pfic" elementFormDefault="qualified" attributeFormDefault="unqualified">
     <xs:element name="PFintegranteCoordinado">
         <xs:annotation>

@@ -1,6 +1,3 @@
-<!--
- edited with XMLSpy v2009 (http://www.altova.com) by SAT (.) 
--->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:detallista="http://www.sat.gob.mx/detallista" targetNamespace="http://www.sat.gob.mx/detallista" elementFormDefault="qualified" attributeFormDefault="unqualified">
     <xs:element name="detallista">
         <xs:annotation>
