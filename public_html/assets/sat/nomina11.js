@@ -1,8 +1,8 @@
 
-/* 
+/*
     Recibo de pago de nómina. v1.1.
     Complemento al Comprobante Fiscal Digital a través de Internet (CFDI) para el manejo de datos de Nómina.
-    
+
     http://www.sat.gob.mx/informacion_fiscal/factura_electronica/Paginas/complemento_nomina.aspx
     http://www.sat.gob.mx/sitio_internet/cfd/nomina/nomina11.xsd
 
@@ -10,32 +10,32 @@
  */
 
 function Nomina() {
-        
+
     /* Nodo opcional para expresar las percepciones aplicables */
     this.percepciones = {
-            
+
         /* Nodo para expresar la información detallada de una percepción */
         percepcion: null, /* array : Percepcion */
-        
+
         /* Atributo requerido para expresar el total de percepciones gravadas que se relacionan en el comprobante */
         totalGravado: null, /* object : t_Importe() */
-        
+
         /* Atributo requerido para expresar el total de percepciones exentas que se relacionan en el comprobante */
         totalExento: null /* object : t_Importe() */
-        
+
     };
 
     /* Nodo opcional para expresar las deducciones aplicables */
     this.deducciones = {
         /* Nodo para expresar la información detallada de una deducción */
         deduccion : null, /* array : Deduccion() */
-        
+
         /* Atributo requerido para expresar el total de deducciones gravadas que se relacionan en el comprobante */
         totalGravado: null,
-        
+
         /* Atributo requerido para expresar el total de deducciones exentas que se relacionan en el comprobante */
         totalExento: null
-    }; 
+    };
 
     /* Nodo opcional para expresar las incapacidades aplicables */
     this.incapacidades = null; /* array : Incapacidad() */
@@ -45,70 +45,70 @@ function Nomina() {
 
     /* Atributo requerido para la expresión de la versión del complemento */
     this.version = '1.1';
-    
+
     /* Atributo opcional para expresar el registro patronal a 20 posiciones máximo */
     this.registroPatronal = null;
-    
+
     /* Atributo requerido para expresar el número de empleado de 1 a 15 posiciones */
     this.numEmpleado = null;
-    
+
     /* Atributo requerido para la expresión de la CURP del trabajador */
     this.curp = null; /* object : t_CURP() */
-    
+
     /* Atributo requerido para la expresión de la clave del régimen por el cual se tiene contratado al trabajador, conforme al catálogo publicado en el portal del SAT en internet */
     this.tipoRegimen = null;
-    
+
     /* Atributo opcional para la expresión del número de seguridad social aplicable al trabajador */
     this.numSeguridadSocial = null;
-    
+
     /* Atributo requerido para la expresión de la fecha efectiva de erogación del gasto. Se expresa en la forma aaaa-mm-dd, de acuerdo con la especificación ISO 8601. */
     this.fechaPago = null;
-    
+
     /* Atributo requerido para la expresión de la fecha inicial del pago. Se expresa en la forma aaaa-mm-dd, de acuerdo con la especificación ISO 8601. */
     this.fechaInicialPago = null;
-    
+
     /* Atributo requerido para la expresión de la fecha final del pago. Se expresa en la forma aaaa-mm-dd, de acuerdo con la especificación ISO 8601. */
     this.fechaFinalPago = null;
-    
+
     /* Atributo requerido para la expresión del número de días pagados */
     this.numDiasPagados = null;
-    
+
     /* Atributo opcional para la expresión del departamento o área a la que pertenece el trabajador */
     this.departamento = null;
-    
+
     /* Atributo opcional para la expresión de la CLABE */
     this.clabe = null; /* object : t_Clabe() */
-    
+
     /* Atributo opcional para la expresión del Banco conforme al catálogo; donde se realiza un depósito de nómina */
     this.banco = null;
-    
+
     /* Atributo opcional para expresar la fecha de inicio de la relación laboral entre el empleador y el empleado */
     this.fechaInicioRelLaboral = null;
-    
+
     /* Número de semanas que el empleado ha mantenido relación laboral con el empleador */
     this.antiguedad = null;
-    
+
     /* Puesto asignado al empleado o actividad que realiza */
     this.puesto = null;
-    
+
     /* Tipo de contrato que tiene el trabajador: Base, Eventual, Confianza, Sindicalizado, a prueba, etc. */
     this.tipoContrato = null;
-    
+
     /* Tipo de jornada que cubre el trabajador: Diurna, nocturna, mixta, por hora, reducida, continuada, partida, por turnos, etc. */
     this.tipoJornada = null;
-    
+
     /* Forma en que se establece el pago del salario: diario, semanal, quincenal, catorcenal mensual, bimestral, unidad de obra, comisión, precio alzado, etc. */
     this.periodicidadPago = null;
-    
+
     /* Retribución otorgada al trabajador, que se integra por los pagos hechos en efectivo por cuota diaria, gratificaciones, percepciones, alimentación, habitación, primas, comisiones, prestaciones en especie y cualquiera otra cantidad o prestación que se entregue al trabajador por su trabajo, sin considerar los conceptos que se excluyen de conformidad con el Artículo 27 de la Ley del Seguro Social. (Se emplea para pagar las cuotas y aportaciones de Seguridad Social). */
     this.salarioBaseCotApor = null;
-    
+
     /* Clave conforme a la Clase en que deben inscribirse los patrones, de acuerdo a las actividades que desempeñan sus trabajadores, según lo previsto en el artículo 196 del Reglamento en Materia de Afiliación Clasificación de Empresas, Recaudación y Fiscalización. Catálogo publicado en el portal del SAT en internet */
     this.riesgoPuesto = null;
-    
+
     /* El salario se integra con los pagos hechos en efectivo por cuota diaria, gratificaciones, percepciones, habitación, primas, comisiones, prestaciones en especie y cualquiera otra cantidad o prestación que se entregue al trabajador por su trabajo, de conformidad con el Art. 84 de la Ley Federal del Trabajo. (Se utiliza para el cálculo de las indemnizaciones). */
     this.salarioDiarioIntegrado = null; /* object : t_Importe() */
-    
+
 };
 
 /* contenedor de objetos para nómina */
@@ -126,7 +126,7 @@ var _nomina = {
         this.descuento = null; /* object : t_Importe() */
 
     },
-    
+
     /* Nodo opcional para expresar información de las horas extras */
     HorasExtra: function() {
 
@@ -143,8 +143,8 @@ var _nomina = {
         this.importePagado = null; /* object : t_Importe() */
 
     },
-    
-    
+
+
     /* Nodo para expresar la información detallada de una deducción */
     Deduccion: function() {
 
@@ -164,9 +164,9 @@ var _nomina = {
         this.importeExento = null; /* object : t_Importe() */
 
     },
-    
+
     Percepcion: function() {
-            
+
         /* Clave agrupadora. Clasifica la percepción conforme al catálogo publicado en el portal del SAT en internet  */
         this.tipoPercepcion = null; /* pattern: [0-9]{3} */
 
@@ -183,23 +183,23 @@ var _nomina = {
         this.importeExento = null; /* object : t_Importe() */
 
     },
-    
+
     /* Tipo definido para la expresión de una CURP */
     CURP: function() {
         this.curp = null; /* [A-Z][A,E,I,O,U,X][A-Z]{2}[0-9]{2}[0-1][0-9][0-3][0-9][M,H][A-Z]{2}[B,C,D,F,G,H,J,K,L,M,N,Ñ,P,Q,R,S,T,V,W,X,Y,Z]{3}[0-9,A-Z][0-9] */
     },
-    
+
     /* Tipo definido para expresar importes numéricos con fracción hasta seis decimales */
     Importe: function() {
         this.importe = null;
     },
-    
+
     /* Tipo definido para expresar la CLABE interbancaria */
     Clabe: function() {
         this.clabe = null; /* [0-9]{18} */
     },
-    
-    /* 
+
+    /*
         Catálogos del complemento de Nómina.
         Régimen de Contratación del trabajador
         http://www.sat.gob.mx/informacion_fiscal/factura_electronica/Documents/catalogo_complemento_nomina_Act.pdf
@@ -325,10 +325,10 @@ var _nomina = {
 
     ],
 
-    /* 
+    /*
         Estos elementos sólo serán utilizados por Entidades Federativas, Municipios o
         demarcaciones territoriales del Distrito Federal, organismos autónomos y entidades
-        paraestatales y paramunicipales. 
+        paraestatales y paramunicipales.
     */
     tipoPercepcion : [
 
@@ -408,14 +408,3 @@ var _nomina = {
 
     ]
 };
-
-
-
-
-
-
-
-
-
-
-

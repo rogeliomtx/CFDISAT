@@ -222,13 +222,46 @@
                                                         <tr><th>ADUANA</th>    <td>{{concepto.informacionAduanera.aduana}}</td></tr>
                                                     </table>
                                                 </div>
-                                                <div class="col-xs-6" ng-if="concepto.parte !== null">
-                                                    <h5>Partes</h5>
-                                                    {{ concepto.parte}}
-                                                </div>
                                                 <div class="col-xs-6" ng-if="concepto.noIdentificacion !== null">
                                                     <h5>No Identificación</h5>
                                                     {{ concepto.noIdentificacion}}
+                                                </div>
+                                                <div class="col-xs-12" ng-if="concepto.parte !== null">
+                                                    <h5>Partes</h5>
+                                                    
+                                                    <table class="table-striped table-responsive table-padded" ng-if="concepto.informacionAduanera !== null">
+                                                        <tr><th colspan="2"><h5>INFORMACIÓN ADUANERA</h5></th></tr>
+                                                        <tr><th>FECHA</th><td>{{concepto.parte.informacionAduanera.fecha}}</td></tr>
+                                                        <tr><th>NÚMERO</th><td>{{concepto.parte.informacionAduanera.numero}}</td></tr>
+                                                        <tr><th>ADUANA</th><td>{{concepto.parte.informacionAduanera.aduana}}</td></tr>
+                                                    </table>
+                                                    
+                                                    <table class="table-striped table-responsive table-padded">
+                                                        <tr ng-if="concepto.parte.cantidad !== null">
+                                                            <th>CANTIDAD</th>
+                                                            <td>{{concepto.parte.cantidad}}</td>
+                                                        </tr>
+                                                        <tr ng-if="concepto.parte.valorUnitario !== null">
+                                                            <th>VALOR UNITARIO</th>
+                                                            <td>{{concepto.parte.valorUnitario}}</td>
+                                                        </tr>
+                                                        <tr ng-if="concepto.parte.importe !== null">
+                                                            <th>IMPORTE</th>
+                                                            <td>{{concepto.parte.importe}}</td>
+                                                        </tr>
+                                                        <tr ng-if="concepto.parte.unidad !== null">
+                                                            <th>UNIDAD</th>
+                                                            <td>{{concepto.parte.unidad}}</td>
+                                                        </tr>
+                                                        <tr ng-if="concepto.parte.descripcion !== null">
+                                                            <th>DESCRIPCION</th>
+                                                            <td>{{concepto.parte.descripcion}}</td>
+                                                        </tr>
+                                                        <tr ng-if="concepto.parte.noIdentificacion !== null">
+                                                            <th>NO. IDENTIFICACIÓN</th>
+                                                            <td>{{concepto.parte.noIdentificacion}}</td>
+                                                        </tr>
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>

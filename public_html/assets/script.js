@@ -436,7 +436,7 @@ app.controller('CDFICtrl', function ($scope) {
             
         }
         
-//        $scope.cfdis = new Array();
+        $scope.cfdis = new Array();
     };
  
     

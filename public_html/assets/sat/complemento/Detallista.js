@@ -49,6 +49,6 @@ var _detallista = {
     this.text = null;
   },
 
-  entityTypeArray = [ 'INVOICE', 'DEBIT_NOTE', 'CREDIT_NOTE', 'LEASE_RECEIPT', 'HONORARY_RECEIPT', 'PARTIAL_INVOICE', 'TRANSPORT_DOCUMENT', 'AUTO_INVOICE'],
-  codeArray = ['AAB', 'DUT', 'PUR', 'ZZZ' ]
+  entityTypeArray : [ 'INVOICE', 'DEBIT_NOTE', 'CREDIT_NOTE', 'LEASE_RECEIPT', 'HONORARY_RECEIPT', 'PARTIAL_INVOICE', 'TRANSPORT_DOCUMENT', 'AUTO_INVOICE'],
+  codeArray : ['AAB', 'DUT', 'PUR', 'ZZZ' ]
 };

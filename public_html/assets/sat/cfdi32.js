@@ -1,67 +1,68 @@
 
-/* 
+/*
     Estándar de Comprobante fiscal digital a través de Internet.  v3.2.
     http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv32.xsd
  */
 
 function Comprobante() {
-    
+
     /* Id para sistema. No relacionado al SAT. */
     this.id = null;
-    
+
     /* REQUERIDO. Nodo requerido para expresar la información del contribuyente emisor del comprobante. */
     this.emisor = {
-        
+
         /* OPCIONAL. Nodo opcional para precisar la información de ubicación del domicilio fiscal del contribuyente emisor */
         domicilioFiscal : null, /* object : t_UbicacionFiscal() */
-        
+
         /* OPCIONAL. Nodo opcional para precisar la información de ubicación del domicilio en donde es emitido el comprobante fiscal en caso de que sea distinto del domicilio fiscal del contribuyente emisor. */
         expedidoEn : null, /* object : t_Ubicacion() */
-        
+
         /* REQUERIDO. Nodo requerido para incorporar los regímenes en los que tributa el contribuyente emisor. Puede contener más de un régimen. */
         regimenFiscal : null, /* array : Regimen() */
-        
+
         /* REQUERIDO. Atributo requerido para la Clave del Registro Federal de Contribuyentes correspondiente al contribuyente emisor del comprobante sin guiones o espacios. */
         rfc: null, /* object : t_RFC() */
-        
-        /* OPCIONAL. Atributo opcional para el nombre, denominación o razón social del contribuyente emisor del comprobante. */    
+
+        /* OPCIONAL. Atributo opcional para el nombre, denominación o razón social del contribuyente emisor del comprobante. */
         nombre: null
-        
+
     };
-    
+
     /* REQUERIDO. Nodo requerido para precisar la información del contribuyente receptor del comprobante. */
     this.receptor = {
-        
+
         /*  OPCIONAL. Nodo opcional para la definición de la ubicación donde se da el domicilio del receptor del comprobante fiscal. */
         domicilio: null, /* array : t_Ubicacion() */
-        
+
         /* REQUERIDO. Atributo requerido para precisar la Clave del Registro Federal de Contribuyentes correspondiente al contribuyente receptor del comprobante. */
         rfc: null, /* object : t_RFC() */
-        
+
         /* OPCIONAL. Atributo opcional para el nombre, denominación o razón social del contribuyente receptor del comprobante. */
         nombre: null
-        
+
     };
-    
+
     /* REQUERIDO. Nodo requerido para enlistar los conceptos cubiertos por el comprobante. */
     this.conceptos = null; /* array : Concepto() */
 
     /* Nodo requerido para capturar los impuestos aplicables. */
     this.impuestos = {
-        
+
         /* Nodo opcional para capturar los impuestos retenidos aplicables */
         retenciones: null, /* array : Retencion() */
-    
+
         /* Nodo opcional para asentar o referir los impuestos trasladados aplicables */
         traslados: null, /* array : Traslado() */
-    
+
         /* Atributo opcional para expresar el total de los impuestos retenidos que se desprenden de los conceptos expresados en el comprobante fiscal digital a través de Internet. */
         totalImpuestosRetenidos: null, /* object : t_Importe() */
-        
+
         /* Atributo opcional para expresar el total de los impuestos trasladados que se desprenden de los conceptos expresados en el comprobante fiscal digital a través de Internet. */
         totalImpuestosTrasladados: null /* object : t_Importe() */
+
     },
-            
+
     /* Nodo opcional donde se incluirá el complemento Timbre Fiscal Digital de manera obligatoria y los nodos complementarios determinados por el SAT, de acuerdo a las disposiciones particulares a un sector o actividad específica. */
     this.complemento = null; /* array : any */
 
@@ -136,11 +137,11 @@ function Comprobante() {
 
     /* Atributo opcional para señalar el total del comprobante que se hubiese expedido por el valor total de la operación, tratándose del pago en parcialidades */
     this.montoFolioFiscalOrig = null; /* object : t_Importe() */
-        
+
 }
 
 var _comprobante = {
-    
+
     /* Atributo requerido para incorporar el nombre del régimen en el que tributa el contribuyente emisor. */
     Regimen: function() {
         this.regimen = null;
@@ -169,7 +170,7 @@ var _comprobante = {
         this.parte = {
 
             /* Nodo opcional para introducir la información aduanera aplicable cuando se trate de partes o componentes importados vendidos de primera mano. */
-            informacionAduanera: null, /* array : t_InformacionAduanera() */ 
+            informacionAduanera: null, /* array : t_InformacionAduanera() */
 
             /* Atributo requerido para precisar la cantidad de bienes o servicios del tipo particular definido por la presente parte. */
             cantidad: null,
@@ -333,5 +334,5 @@ var _comprobante = {
         this.aduana = null;
 
     }
+    
 };
-
