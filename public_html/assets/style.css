@@ -1,16 +1,24 @@
 body {
     background: #f5f5f5;
-    font-family: 'Open Sans', Arial;
-    color: #aaa;
+    font-family: 'Montserrat', sans-serif;
+    color: #78909C;
+}
+
+strong, b, th {
+    font-weight: 500;
 }
 
 body .container:first-child {
     margin-top: 3em;
 }
 
+h1 {
+    color: #212121;
+}
+
 h5 {
-    font-weight: bold;
-    color: #000;
+    font-weight: 500;
+    color: #212121;
     text-transform: uppercase;
 }
 
@@ -22,27 +30,30 @@ h5 {
     border-radius: .28571429rem;
     box-shadow: 0 1px 3px 0 #d4d4d5,0 0 0 1px #d4d4d5;
     transition: box-shadow .1s ease,transform .1s ease;
-    
+
     margin-bottom: 1.5em;
 }
 
 .card .header {
     font-weight: 700;
-    color: #000;
+    color: #263238;
     font-size: 1.3em;
     text-transform: uppercase;
 }
 
 .card .summary {
-    font-weight: 100;
-    color: #5F83AE;
-    font-size: 2em;
+    font-weight: 700;
+    color: #455A64;
+    font-size: 1.9em;
     margin-top: .3em;
     line-height: .7em;
     text-align: right;
+    letter-spacing: 1px;
 }
 
-.card .summary .title { font-size: .4em; }
+.card .summary span { display: block; }
+.card .summary .title { font-size: .4em; margin-top: .5em; }
+.card .summary .total { text-align: right; }
 .card .specs          { margin-top: 1em; }
 .card .actions        { margin-top: 1em; }
 
@@ -63,12 +74,18 @@ h5 {
 
 /* Sobreescribiendo bootstrap */
 .btn-link {
-    color: #337ab7;
+    color: #0091EA;
     border-radius: 0;
     padding-left: 0;
-    font-weight: bold;
+    font-weight: 500;
     font-size: .9em;
+    letter-spacing: 1px;
     outline: none!important;
+}
+
+.btn-link:hover,
+.btn-link:active {
+    color: #0091EA;
 }
 
 .table-padded { width: 100%; }
@@ -79,18 +96,21 @@ h5 {
     padding: .5em;
     max-width: 100px;
     word-wrap: break-word;
+    text-transform: lowercase;
 }
 
 .label-default {
-    background-color: #fff;
-    color: #f00;
+    background-color: transparent;
+    color: #4CAF50;
     padding-left: 0;
-    font-weight: bold;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .text-bold {
-    font-weight: bold;
-    color: #000;
+    font-weight: 500;
+    color: #263238;
 }
 
 h6 {
@@ -105,11 +125,20 @@ h6 {
     border-radius: 10px;
 }
 
+.panel {
+    border: 1px solid #5C6BC0;
+}
+
+.panel .panel-heading {
+    background: #5C6BC0;
+}
+
 .panel-title {
     margin-top: 0;
     margin-bottom: 0;
     font-size: 12px;
-    color: #888;
-    font-weight: bold;
+    color: #fff;
+    font-weight: 500;
     text-transform: uppercase;
+    letter-spacing: 1px;
 }
