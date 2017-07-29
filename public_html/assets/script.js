@@ -58,7 +58,7 @@ app.controller('CDFICtrl', function ($scope) {
             concepto.parte.noIdentificacion = conceptoJson.Parte.noIdentificacion ? conceptoJson.Parte.noIdentificacion : null;
             concepto.parte.descripcion      = conceptoJson.Parte.descripcion;
             concepto.parte.valorUnitario    = conceptoJson.Parte.valorUnitario    ? conceptoJson.Parte.valorUnitario    : null;
-            concepto.parte.importe          = conceptoJson.Parte.importe         ? concepto.Json.Parte.importe          : null;
+            concepto.parte.importe          = conceptoJson.Parte.importe          ? concepto.Json.Parte.importe          : null;
 
         } else {
             concepto.parte = null;
@@ -83,9 +83,103 @@ app.controller('CDFICtrl', function ($scope) {
             /* ID interno */
             /* ============================================================================================= */
             comprobante.id = $scope.certificados.length;
+            
+            /* Revisión de versiones */
+            if (json.version) {
+                if (json.version === '3.2') {
+                    comprobante = $scope.cargarVersion32(comprobante, json);
+                    
+                } else if (json.version === '3.3') {
+                    comprobante = cargarVersion33(comprobante, json);
+                }
+            }
 
-
-            /* Complemento */
+            /* Se guarda todo */
+            /* ============================================================================================= */
+            $scope.certificados.push(comprobante);
+            
+            
+            $scope.resumen.total                     += parseFloat(comprobante.total);
+            $scope.resumen.subtotal                  += parseFloat(comprobante.subTotal);
+            $scope.resumen.totalImpuestosRetenidos   += parseFloat(comprobante.impuestos.totalImpuestosRetenidos);
+            $scope.resumen.totalImpuestosTrasladados += parseFloat(comprobante.impuestos.totalImpuestosTrasladados);
+            
+        }
+        
+        $scope.cfdis = new Array();
+    };
+    
+    $scope.cargarVersion33 = function(comprobante, json) {
+        
+        /* CFDIs relacionados */
+        if (json.CfdiRelacionados) {
+            for (var c in json.CfdiRelacionados) {
+                _cfdi = json.Impuestos[c];
+            }
+        }
+        
+        /* emisor */
+        if (json.Emisor) {
+            comprobante.emisor.rfc = json.Emisor.Rfc;
+            comprobante.emisor.nombre = json.Emisor.Nombre;
+            comprobante.emisor.regimenFiscal = json.Emisor.RegimenFiscal;
+        }
+        
+        /* receptor */
+        if (json.Receptor) {
+            comprobante.receptor.rfc = json.Receptor.Rfc;
+            comprobante.receptor.nombre = json.Receptor.Nombre;
+            comprobante.residenciaFiscal = json.Receptor.ResidenciaFiscal;
+            comprobante.numRegIdTrib = json.Receptor.NumRegIdTrib;
+            comprobante.usoCFDI = json.Receptor.Usocfdi;
+        }
+        
+        /* impuestos */
+        if (json.Impuestos) {
+            for (var i in json.Impuestos) {
+                _impuesto = json.Impuestos[i];
+            }
+        }
+        
+        /* conceptos */
+        if (json.Conceptos) {
+            for (var c in json.Conceptos) {
+                _concepto = json.Conceptos[c];
+            }
+        }
+        
+        /* addenda */
+        if (json.Addenda) {
+            for (var c in json.Conceptos) {
+                _addenda = json.Conceptos[c];
+            }
+        }
+        
+        
+        comprobante.version = json.version;
+        comprobante.serie = json.serie;
+        comprobante.folio = json.folio;
+        comprobante.fecha = json.fecha;
+        comprobante.sello = json.sello;
+        comprobante.formatoPago = json.formaDePago;
+        comprobante.noCertificado = json.noCertificado;
+        comprobante.certificado = json.certificado;
+        comprobante.condicionesDePago = json.condicionesDePago;
+        comprobante.subTotal = json.subTotal;
+        comprobante.descuento = json.descuento;
+        comprobante.moneda = json.moneda;
+        comprobante.tipoCambio = json.tipoCambio;
+        comprobante.total = json.total;
+        comprobante.tipoComprobante = json.tipocomprobante;
+        comprobante.metodoPago = json.metodoDePago;
+        comprobante.lugarExpedicion = json.LugarExpedicion;
+        comprobante.confirmacion = json.confirmacion;
+        
+        
+    };
+    
+    $scope.cargarVersion32 = function(comprobante, json) {
+                    /* Complemento */
             /* http://www.sat.gob.mx/informacion_fiscal/factura_electronica/Paginas/complementos_factura_cfdi.aspx */
             /* ============================================================================================= */
             
@@ -422,23 +516,7 @@ app.controller('CDFICtrl', function ($scope) {
             /* totales */
             comprobante.impuestos.totalImpuestosRetenidos   = json.Impuestos.totalImpuestosRetenidos   ? json.Impuestos.totalImpuestosRetenidos   : 0;
             comprobante.impuestos.totalImpuestosTrasladados = json.Impuestos.totalImpuestosTrasladados ? json.Impuestos.totalImpuestosTrasladados : 0;
-
-
-            /* Se guarda todo */
-            /* ============================================================================================= */
-            $scope.certificados.push(comprobante);
-            
-            
-            $scope.resumen.total                     += parseFloat(comprobante.total);
-            $scope.resumen.subtotal                  += parseFloat(comprobante.subTotal);
-            $scope.resumen.totalImpuestosRetenidos   += parseFloat(comprobante.impuestos.totalImpuestosRetenidos);
-            $scope.resumen.totalImpuestosTrasladados += parseFloat(comprobante.impuestos.totalImpuestosTrasladados);
-            
-        }
-        
-        $scope.cfdis = new Array();
-    };
- 
+    }
     
 }).directive("files", function () {
     return {

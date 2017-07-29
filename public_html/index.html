@@ -11,6 +11,19 @@
         <link href="assets/style.css" rel="stylesheet" />
     </head>
     <body ng-app="CFDIapp" ng-controller="CDFICtrl">
+
+        <div class="container">
+            <ul class="nav nav-tabs nav-justified">
+                <li><a href="#">CFDI v3.2</a></li>
+                <li><a href="#">CFDI v3.3</a></li>
+                <li><a href="#">Búsquedas</a></li>
+                <li><a href="#">Enlaces</a></li>
+            </ul>
+            <ul class="nav nav-pills nav-justified">
+            </ul>
+        </div>
+
+
         <div class="container">
             <div class="card">
                 <h1>Visualizador de archivos CFDI (alpha)</h1>
@@ -223,14 +236,14 @@
                                                 </div>
                                                 <div class="col-xs-12" ng-if="concepto.parte !== null">
                                                     <h5>Partes</h5>
-                                                    
+
                                                     <table class="table-responsive table-padded" ng-if="concepto.informacionAduanera !== null">
                                                         <tr><td colspan="2"><h5>INFORMACIÓN ADUANERA</h5></td></tr>
                                                         <tr><td>FECHA</td><td>{{concepto.parte.informacionAduanera.fecha}}</td></tr>
                                                         <tr><td>NÚMERO</td><td>{{concepto.parte.informacionAduanera.numero}}</td></tr>
                                                         <tr><td>ADUANA</td><td>{{concepto.parte.informacionAduanera.aduana}}</td></tr>
                                                     </table>
-                                                    
+
                                                     <table class="table-responsive table-padded">
                                                         <tr ng-if="concepto.parte.cantidad !== null">
                                                             <td>CANTIDAD</td>
@@ -263,7 +276,7 @@
                                     </div>
                                     <hr>
                                 </section>
-                                
+
                                 <section ng-if="certificado.complemento.timbreFiscalDigital != null">
                                     <label class="label label-default">Complementos</label>
                                     <h5>Timbre fiscal digital <button ng-click="_timbreFiscal = !_timbreFiscal" class="btn btn-link">{{_timbreFiscal ? "VER MENOS" : "VER MÁS"}}</button></h5>
@@ -407,9 +420,9 @@
                                             </table>
                                             <hr>
                                         </section>
-                                        
+
                                         <button ng-click="_nominaDetalle = !_nominaDetalle" class="btn btn-link btn-block">{{_nominaDetalle ? "VER MENOS" : "VER MÁS DETALLE DE NÓMINA"}}</button>
-                                        
+
                                         <section ng-show="_nominaDetalle">
                                             <table class="table-responsive table-padded">
                                                 <tr><td>Version</td><td>{{nomina.version}}</td></tr>
@@ -456,7 +469,7 @@
                                                     <td>{{nomina.salarioDiarioIntegrado| currency}}</td></tr>
                                             </table>
                                         </section>
-                                        
+
                                         <hr>
                                     </section>
                                 </section>
